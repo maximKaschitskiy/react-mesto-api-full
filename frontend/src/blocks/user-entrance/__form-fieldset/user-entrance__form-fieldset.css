@@ -1,0 +1,9 @@
+.user-entrance__form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 100%;
+}

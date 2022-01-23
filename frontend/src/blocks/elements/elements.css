@@ -1,0 +1,13 @@
+.elements {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fill, minmax(282px, auto));
+  grid-row-gap: 20px;
+  grid-column-gap: 17px;
+  justify-content: center;
+  grid-auto-flow: row dense;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 51px;
+}

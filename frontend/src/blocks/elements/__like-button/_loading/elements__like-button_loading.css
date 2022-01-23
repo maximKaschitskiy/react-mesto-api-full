@@ -1,0 +1,21 @@
+.elements__like-button_loading {  
+  transform: scale(1);
+	animation: pulse-black 0.7s infinite;
+}
+
+@keyframes pulse-black {
+	0% {
+		transform: scale(0.25);
+		box-shadow:rgba(0, 0, 0, 0.7);
+	}
+	
+	50% {
+		transform: scale(1);
+		box-shadow:rgba(0, 0, 0, 0);
+	}
+	
+	100% {
+		transform: scale(0.25);
+		box-shadow:rgba(0, 0, 0, 0);
+	}
+}

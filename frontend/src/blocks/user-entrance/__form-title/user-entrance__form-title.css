@@ -1,0 +1,29 @@
+.user-entrance__form-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+@media only screen and (max-width: 320px) {
+	.user-entrance__form-title {
+    font-size: 6.25vw;
+    line-height: 7.5vw;
+  }
+ }
+
+@media only screen and (min-width: 321px) and (max-width: 1280px) {
+	.user-entrance__form-title {
+    font-size: calc(0.41vw + 18px);
+    line-height: calc(0.52vw + 22px);
+  }
+ }
+
+ @media only screen and (min-width: 1281px) {
+	.user-entrance__form-title {
+    font-size: 24px;
+    line-height: 22px;
+  }
+ }

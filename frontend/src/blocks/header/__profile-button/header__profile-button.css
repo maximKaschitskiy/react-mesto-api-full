@@ -1,0 +1,37 @@
+.header__profile-button {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #FFFFFF;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.header__profile-button:visited {
+  color: #FFFFFF;
+}
+
+@media only screen and (max-width: 320px) {
+  .header__profile-button {
+    font-size: 4.37vw;
+    line-height: 5.31vw;
+  }
+ }
+
+@media only screen and (min-width: 321px) and (max-width: 1280px) {
+  .header__profile-button {
+    font-size: calc(0.41vw + 12px);
+    line-height: calc(0.52vw + 15px);
+  }
+ }
+
+@media only screen and (min-width: 1281px) and (max-width: 1920px) {
+  .header__profile-button {
+    font-size: 18px;
+    line-height: 22px;
+  }
+ }
