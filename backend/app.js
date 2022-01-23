@@ -17,6 +17,10 @@ const { PORT = 3001 } = process.env;
 
 const app = express();
 
+app.listen(PORT, () => {
+  console.log(`Сервер стартовал. Порт: ${PORT}`);
+});
+
 app.use(requestLogger);
 
 app.get('/crash-test', () => {
@@ -78,6 +82,3 @@ app.use('*', (req, res, next) => {
 
 app.use(errorMiddleware);
 
-app.listen(PORT, () => {
-  console.log(`Сервер стартовал. Порт: ${PORT}`);
-});
