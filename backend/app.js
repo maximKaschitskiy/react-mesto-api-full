@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -9,15 +10,22 @@ const auth = require('./middlewares/auth');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 const { Unauthorized } = require('./errors/unauthorized');
 const { NotFound } = require('./errors/notFound');
-const corsMiddleware = require('./middlewares/corsMiddleware.js');
+const corsMiddleware = require('./middlewares/corsMiddleware');
+const { requestLogger, errorLogger } = require('./middlewares/logMiddleware');
 
 const { PORT = 3001 } = process.env;
 
 const app = express();
-app.use(corsMiddleware);
-app.listen(PORT, () => {
-  console.log(`Сервер стартовал. Порт: ${PORT}`);
+
+app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
 });
+
+app.use(corsMiddleware);
 
 mongoose.connect('mongodb://localhost:27017/mestodb')
   .then(() => console.log('Подключение к БД удалось'))
@@ -56,6 +64,11 @@ app.post(
 app.use(auth);
 app.use('/', auth, usersRouter);
 app.use('/', auth, cardsRouter);
+
+app.use(errorLogger);
+
+app.use(errors());
+
 app.use('*', (req, res, next) => {
   if (!req.user) {
     next(new Unauthorized('Неавторизовано'));
@@ -63,5 +76,8 @@ app.use('*', (req, res, next) => {
   next(new NotFound('Не найдено'));
 });
 
-app.use(errors());
 app.use(errorMiddleware);
+
+app.listen(PORT, () => {
+  console.log(`Сервер стартовал. Порт: ${PORT}`);
+});
