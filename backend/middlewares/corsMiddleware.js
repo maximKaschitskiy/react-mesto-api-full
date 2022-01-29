@@ -4,8 +4,10 @@ const ALLOWED_CORS = [
   'https://localhost:3000',
   'http://84.201.141.78',
   'https://84.201.141.78',
+  'http://wwww.hot-chicks.nomoredomains.work',
+  'https://www.hot-chicks.nomoredomains.work',
   'http://hot-chicks.nomoredomains.work',
-  'https://hot-chicks.nomoredomains.work',
+  'https:/hot-chicks.nomoredomains.work',
 ];
 
 module.exports = (req, res, next) => {
