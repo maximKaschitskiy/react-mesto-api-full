@@ -53,5 +53,5 @@ class AccountApi {
 
 const baseUrl = 'http://wet-kitty.nomoredomains.work';
 
-const addAccountApi = new AccountApi(baseUrl());
+const addAccountApi = new AccountApi(baseUrl);
 export default addAccountApi;
