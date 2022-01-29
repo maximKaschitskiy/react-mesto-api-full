@@ -18,7 +18,6 @@ class AccountApi {
       } 
 
     auth(values) {
-      console.log('auth');
         return fetch(`${this.baseUrl}/signin`, {
             method: 'POST',
             headers: {"Content-Type": "application/json",
@@ -51,7 +50,7 @@ class AccountApi {
     }
 }
 
-const baseUrl = 'http://wet-kitty.nomoredomains.work';
+const baseUrl = 'www.wet-kitty.nomoredomains.work';
 
 const addAccountApi = new AccountApi(baseUrl);
 export default addAccountApi;
