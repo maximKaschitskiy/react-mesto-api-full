@@ -1,5 +1,6 @@
 const cardsRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const urlPattern = require('../utils/regexp');
 
 const {
   getCards, createCard, likeCard, deleteCard, dislikeCard,
@@ -12,7 +13,7 @@ cardsRouter.post(
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
-      link: Joi.string().required().regex(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/),
+      link: Joi.string().required().regex(urlPattern),
     }),
   }),
   createCard,
@@ -21,8 +22,8 @@ cardsRouter.post(
 cardsRouter.put(
   '/cards/:_id/likes',
   celebrate({
-    body: Joi.object().keys({
-      cardId: Joi.string().hex().length(24),
+    params: Joi.object().keys({
+      _id: Joi.string().hex().length(24),
     }),
   }),
   likeCard,
@@ -31,8 +32,8 @@ cardsRouter.put(
 cardsRouter.delete(
   '/cards/:_id',
   celebrate({
-    body: Joi.object().keys({
-      cardId: Joi.string().hex().length(24),
+    params: Joi.object().keys({
+      _id: Joi.string().hex().length(24),
     }),
   }),
   deleteCard,
@@ -41,8 +42,8 @@ cardsRouter.delete(
 cardsRouter.delete(
   '/cards/:_id/likes',
   celebrate({
-    body: Joi.object().keys({
-      cardId: Joi.string().hex().length(24),
+    params: Joi.object().keys({
+      _id: Joi.string().hex().length(24),
     }),
   }),
   dislikeCard,

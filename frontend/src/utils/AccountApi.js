@@ -4,6 +4,7 @@ class AccountApi {
     }
 
     register(values) {
+      console.log('register');
         return fetch(`${this.baseUrl}/signup`, {
             method: 'POST',
             headers: {"Content-Type": "application/json",
@@ -17,6 +18,7 @@ class AccountApi {
       } 
 
     auth(values) {
+      console.log('auth');
         return fetch(`${this.baseUrl}/signin`, {
             method: 'POST',
             headers: {"Content-Type": "application/json",
@@ -49,6 +51,7 @@ class AccountApi {
     }
 }
 
-const url = 'http://localhost:3001';
-const addAccountApi = new AccountApi(url);
+const baseUrl = 'http://wet-kitty.nomoredomains.work';
+
+const addAccountApi = new AccountApi(baseUrl());
 export default addAccountApi;

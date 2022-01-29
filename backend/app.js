@@ -12,6 +12,7 @@ const { Unauthorized } = require('./errors/unauthorized');
 const { NotFound } = require('./errors/notFound');
 const corsMiddleware = require('./middlewares/corsMiddleware');
 const { requestLogger, errorLogger } = require('./middlewares/logMiddleware');
+const urlPattern = require('./utils/regexp');
 
 const { PORT = 3001 } = process.env;
 
@@ -22,14 +23,13 @@ app.listen(PORT, () => {
 });
 
 app.use(requestLogger);
+app.use(corsMiddleware);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
-app.use(corsMiddleware);
 
 mongoose.connect('mongodb://localhost:27017/mestodb')
   .then(() => console.log('Подключение к БД удалось'))
@@ -59,26 +59,25 @@ app.post(
       password: Joi.string().required().pattern(/^[A-Za-z0-9]{5,30}$/),
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string().regex(/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/),
+      avatar: Joi.string().regex(urlPattern),
     }),
   }),
   createUser,
 );
 
 app.use(auth);
-app.use('/', auth, usersRouter);
-app.use('/', auth, cardsRouter);
-
-app.use(errorLogger);
+app.use('/', usersRouter);
+app.use('/', cardsRouter);
 
 app.use(errors());
 
 app.use('*', (req, res, next) => {
   if (!req.user) {
-    next(new Unauthorized('Неавторизовано'));
+    return next(new Unauthorized('Неавторизовано'));
   }
-  next(new NotFound('Не найдено'));
+  return next(new NotFound('Не найдено'));
 });
 
-app.use(errorMiddleware);
+app.use(errorLogger);
 
+app.use(errorMiddleware);

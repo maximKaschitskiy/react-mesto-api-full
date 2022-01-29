@@ -5,21 +5,15 @@ const { NotFound } = require('../errors/notFound');
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => {
-      res.status(200).send(cards);
-    })
-    .catch((err) => {
-      next(err);
-    });
+    .then((cards) => res.status(200).send(cards))
+    .catch((err) => next(err));
 };
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;
   Card.create({ name, link, owner })
-    .then((card) => {
-      res.status(200).send(card);
-    })
+    .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(
@@ -27,7 +21,8 @@ const createCard = (req, res, next) => {
         );
       }
       next(err);
-    });
+    })
+    .catch((err) => next(err));
 };
 
 const deleteCard = (req, res, next) => {
@@ -38,20 +33,14 @@ const deleteCard = (req, res, next) => {
         next(
           new NotFound('Не найдено'),
         );
-      }
-      if (card.owner.toString() !== id) {
+      } else if (card.owner.toString() !== id) {
         next(
           new Forbidden('Нет прав'),
         );
-      } else {
-        Card.findByIdAndDelete(req.params._id)
-          .then((deletedCard) => {
-            res.status(200).send(deletedCard);
-          })
-          .catch((err) => {
-            next(err);
-          });
       }
+      Card.findByIdAndDelete(req.params._id)
+        .then((deletedCard) => res.status(200).send(deletedCard))
+        .catch((err) => next(err));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -74,9 +63,8 @@ const likeCard = async (req, res, next) => {
         next(
           new NotFound('Не найдено'),
         );
-      } else {
-        res.status(200).send(likes);
       }
+      res.status(200).send(likes);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

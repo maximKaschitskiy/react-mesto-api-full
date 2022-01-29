@@ -10,9 +10,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.status(200).send(users))
-    .catch((err) => {
-      next(err);
-    });
+    .catch((err) => next(err));
 };
 
 const createUser = async (req, res, next) => {
@@ -23,15 +21,13 @@ const createUser = async (req, res, next) => {
   User.create({
     name, about, avatar, email, password: hash,
   })
-    .then((user) => {
-      res.status(201).send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        _id: user._id,
-      });
-    })
+    .then((user) => res.status(201).send({
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      email: user.email,
+      _id: user._id,
+    }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(
@@ -43,10 +39,9 @@ const createUser = async (req, res, next) => {
           new Conflict('Пользователь существует'),
         );
       }
-    })
-    .catch((err) => {
       next(err);
-    });
+    })
+    .catch((err) => next(err));
 };
 
 const getCurrentUserInfo = (req, res, next) => {
@@ -56,13 +51,10 @@ const getCurrentUserInfo = (req, res, next) => {
         next(
           new NotFound('Пользователь не найден'),
         );
-      } else {
-        res.status(200).send(user);
       }
+      res.status(200).send(user);
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch((err) => next(err));
 };
 
 const getUserId = (req, res, next) => {
@@ -72,9 +64,8 @@ const getUserId = (req, res, next) => {
         next(
           new NotFound('Пользователь не найден'),
         );
-      } else {
-        res.status(200).send(user);
       }
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -103,9 +94,8 @@ const updateUser = (req, res, next) => {
         next(
           new NotFound('Пользователь не найден'),
         );
-      } else {
-        res.status(200).send(updUser);
       }
+      res.status(200).send(updUser);
     })
     .catch((err) => {
       switch (err.name) {
@@ -151,9 +141,8 @@ const updateAvatar = (req, res, next) => {
         next(
           new NotFound('Пользователь не найден'),
         );
-      } else {
-        res.status(200).send(newAvatar);
       }
+      res.status(200).send(newAvatar);
     })
     .catch((err) => {
       switch (err.name) {
@@ -189,20 +178,17 @@ const login = (req, res, next) => {
     next(
       new BadRequest('Ошибка валидации'),
     );
-  } else {
-    User.findUserByCredentials(email, password)
-      .then((user) => {
-        const token = jwt.sign(
-          { _id: user._id },
-          NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-          { expiresIn: '7d' },
-        );
-        res.status(200).send({ token });
-      })
-      .catch((err) => {
-        next(err);
-      });
   }
+  User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' },
+      );
+      res.status(200).send({ token });
+    })
+    .catch((err) => next(err));
 };
 
 module.exports = {

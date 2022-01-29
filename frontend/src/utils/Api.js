@@ -120,6 +120,7 @@ class Api {
     }
 }
 
-const url = 'http://localhost:3001';
-const addApi = new Api(url);
+const baseUrl = 'http://wet-kitty.nomoredomains.work';
+
+const addApi = new Api(baseUrl());
 export default addApi;
