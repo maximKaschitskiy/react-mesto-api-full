@@ -7,7 +7,7 @@ const ALLOWED_CORS = [
   'http://wwww.hot-chicks.nomoredomains.work',
   'https://www.hot-chicks.nomoredomains.work',
   'http://hot-chicks.nomoredomains.work',
-  'https:/hot-chicks.nomoredomains.work',
+  'https://hot-chicks.nomoredomains.work',
 ];
 
 module.exports = (req, res, next) => {
