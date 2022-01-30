@@ -120,7 +120,7 @@ class Api {
     }
 }
 
-const baseUrl = 'www.wet-kitty.nomoredomains.work';
+const baseUrl = 'https://wet-kitty.nomoredomains.work';
 
 const addApi = new Api(baseUrl);
 export default addApi;
