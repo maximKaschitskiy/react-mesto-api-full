@@ -10,8 +10,8 @@ class AccountApi {
             headers: {"Content-Type": "application/json",
                       'Access-Control-Allow-Credentials': 'true'},
             body: JSON.stringify({
-                password: values.password,
-                email: values.email
+              login: values.login,
+              password: values.password
             })
         })
         .then(this._checkResponse.bind(this))
@@ -23,8 +23,8 @@ class AccountApi {
             headers: {"Content-Type": "application/json",
                       'Access-Control-Allow-Credentials': 'true'},
             body: JSON.stringify({
-                password: values.password,
-                email: values.email
+              login: values.login,
+              password: values.password
             })
         })
         .then(this._checkResponse.bind(this))
@@ -50,7 +50,7 @@ class AccountApi {
     }
 }
 
-const baseUrl = 'https://wet-kitty.nomoredomains.work';
+const baseUrl = 'http://localhost:3001';
 
-const addAccountApi = new AccountApi(baseUrl);
-export default addAccountApi;
+const accountApi = new AccountApi(baseUrl);
+export default accountApi;

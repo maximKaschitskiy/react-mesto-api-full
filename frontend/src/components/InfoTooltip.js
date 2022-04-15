@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-import succsessIcon from '../images/popup/success.svg'
-import failIcon from '../images/popup/fail.svg'
+import './InfoTooltip.css';
+
+import succsessIcon from '../images/popup/success.svg';
+import failIcon from '../images/popup/fail.svg';
 
 function InfoTooltip({isOpen, onClose, onFail}) {
 
-  const succsessText = { mainMessage: "Вы успешно зарегистрировались!",
+  const succsessText = { mainMessage: "Успешно",
                          altCaption: "Успешно" };
   const failText = { mainMessage: "Что-то пошло не так! Попробуйте ещё раз.",
                       altCaption: "Ошибка" };
