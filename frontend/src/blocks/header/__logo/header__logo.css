@@ -1,0 +1,26 @@
+.header__logo {
+  max-width: 142px;
+  width: auto;
+  grid-area: logo;
+  align-self: flex-start;
+}
+
+ @media only screen and (max-width: 320px) {
+	.header__logo {
+    width: 32.41vw;
+    margin-left: 9.37vw;
+  }
+ }
+@media only screen and (min-width: 321px) and (max-width: 1280px) {
+	.header__logo {
+    width: calc(3.98vw + 90px);
+    margin-left: calc(-3.13vw + 40px);
+  }
+ }
+@media only screen and (min-width: 1281px) and (max-width: 1920px) {
+	.header__logo {
+    width: 11.09vw;
+    margin-left: 0px;
+  }
+ }
+

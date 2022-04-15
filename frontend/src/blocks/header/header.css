@@ -1,0 +1,36 @@
+.header {
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 880px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgb(84, 84, 84, 0.7);
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+@media only screen and (max-width: 320px) {
+  .header {
+    padding-top: 8.75%;
+    width: 100vw;
+    padding-bottom: 9.87vw;
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 1280px) {
+	.header {
+    padding-top: calc(1.77vw + 22px);
+    width: calc(58.33vw + 133px);
+    padding-bottom: calc(0.97vw + 28px);
+  }
+}
+
+@media only screen and (min-width: 1281px) and (max-width: 1920px) {
+	.header{
+    padding-top: 3.51%;
+    width: 68.75vw;
+    padding-bottom: 41px;
+  }
+}

@@ -1,0 +1,30 @@
+.popup__form-caption {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 60px;
+  max-width: 358px;
+}
+
+@media only screen and (max-width: 320px) {
+	.popup__form-caption {
+        font-size: 6.25vw;
+        line-height: 7.5vw;
+    }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 1280px) {
+	.popup__form-caption {
+        font-size: calc(0.41vw + 18px);
+        line-height: calc(0.52vw + 22px);
+    }
+}
+
+ @media only screen and (min-width: 1281px) {
+	.popup__form-caption {
+        font-size: 24px;
+        line-height: 29px;
+    }
+}

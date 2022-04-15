@@ -1,0 +1,8 @@
+.elements__caption {
+  width: 246px;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  margin-top: 25px;
+  margin-bottom: 32px;
+}

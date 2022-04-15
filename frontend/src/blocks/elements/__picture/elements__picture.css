@@ -1,0 +1,7 @@
+.elements__picture {
+  display: flex;
+  object-fit:cover;
+  width: 100%;
+  height: 151px;
+  cursor: pointer;
+}

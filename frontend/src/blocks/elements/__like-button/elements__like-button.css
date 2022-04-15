@@ -1,0 +1,30 @@
+.elements__like-button {  
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  align-self: center;
+  display: flex;
+  background-image: url(../../../images/elements/Vector.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 20px;
+  height: 18px;
+  opacity: 1;
+  transition: opacity 0s, opacity 0.15s linear;
+}
+
+.elements__like-button:hover {
+  opacity: 0.5;    
+}
+
+.elements__like-button:active {
+  background-image: url(../../../images/elements/Union.svg);
+}
+
+.elements__like-button:focus {
+  outline: 0;
+}
+
+

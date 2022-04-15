@@ -1,0 +1,27 @@
+.user-entrance__bottom-link {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.user-entrance__bottom-link:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 320px) {
+	.user-entrance__bottom-link {
+        margin-top: 6.25vw;
+        font-size: 4.37vw;
+    }
+ }
+@media only screen and (min-width: 321px) and (max-width: 1920px) {
+	.user-entrance__bottom-link {
+        margin-top: calc(0.15vw + 19px);
+    }
+ }

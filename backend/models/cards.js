@@ -2,34 +2,35 @@ const mongoose = require('mongoose');
 const urlPattern = require('../utils/regexp');
 
 const cardSchema = new mongoose.Schema({
-  descriptionFirst: {
+  name: {
     type: String,
-    required: [true, 'Обязательное поле'],
+    required: true,
     minlength: 2,
-    maxlength: 50,
+    maxlength: 30,
+  },
+  link: {
+    type: String,
+    required: true,
     validate: {
-      validator: function(v) {
-        return /^[A-Za-z]{2,50}$/.test(v);
-      },
-      message: props => `${props.value} Цифры недопустимы`
+      validator: (url) => urlPattern.test(url),
+      message: 'Некорректный URL',
     },
   },
-  descriptionSecond: {
-    type: String,
-    required: [true, 'Обязательное поле'],
-    minlength: 2,
-    maxlength: 50,
-    validate: {
-      validator: function(v) {
-        return /^[A-Za-z]{2,50}$/.test(v);
-      },
-      message: props => `${props.value} Цифры недопустимы`
-    },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'user',
   },
-  file: {
-    type: String,
-    required: [true, 'Обязательное поле'],
-  }
+  likes: {
+    type: [mongoose.Schema.Types.ObjectId],
+    required: true,
+    default: [],
+    ref: 'user',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model('card', cardSchema);
